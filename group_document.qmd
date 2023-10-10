@@ -30,12 +30,7 @@ print('hello world')
 # Dea
 
 ```{r}
-ciao!!!
-
-```
-
-```{r}
-ciao
+aaaa <- c(a,s,d,f,g,h,j,k,l)
 ```
 
 # Dilan

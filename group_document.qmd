@@ -52,6 +52,17 @@ Hej med jer, jeg er den bedste her!
 CAPTAIN_NOT_A_BIG_BOSS <- c(K, I, N, G, A, S, S)
 ```
 
+## New feature
+
+Formula 1
+
+```{r}
+
+2+2/3/4/4
+```
+
+gs
+
 # Christian
 
 ```{r}

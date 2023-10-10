@@ -56,3 +56,24 @@ CAPTAIN_NOT_A_BIG_BOSS <- c(K, I, N, G, A, S, S)
 CAPTAIN_BIG_BOSS <- c(K, I, N, G)
 
 ```
+
+## NEW FEATURE
+
+```{r}
+bibibi zaæsf 
+az---z -
+  
+  
+  sf
+
+```
+
+THIS IS AMAZING, WOOOW
+
+```{r}
+MACHINe <- c("1,2,2,3,3,31")
+```
+
+```{r}
+
+```

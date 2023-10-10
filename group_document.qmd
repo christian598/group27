@@ -33,6 +33,16 @@ ciao
 
 # Dilan
 
+```{r}
+
+2+2
+```
+
+```{r}
+
+CAPTAIN_NOT_A_BIG_BOSS <- c(K, I, N, G, A, S, S)
+```
+
 # Christian
 
 ```{r}

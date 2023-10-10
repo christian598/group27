@@ -30,3 +30,8 @@ grid()
 # Dilan
 
 # Christian
+
+```{r}
+CAPTAIN_BIG_BOSS <- c(K, I, N, G)
+
+```

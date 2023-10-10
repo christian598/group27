@@ -28,12 +28,7 @@ grid()
 # Dea
 
 ```{r}
-ciao!!!
-
-```
-
-```{r}
-ciao
+ciao <-  c(a,s,d,f,g)
 ```
 
 # Dilan

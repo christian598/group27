@@ -27,6 +27,10 @@ grid()
 
 # Dea
 
+```{r}
+ciao
+```
+
 # Dilan
 
 # Christian

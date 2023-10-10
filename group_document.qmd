@@ -27,6 +27,15 @@ grid()
 
 # Dea
 
+```{r}
+ciao!!!
+
+```
+
+```{r}
+ciao
+```
+
 # Dilan
 
 Hej med jer, jeg er den bedste her!

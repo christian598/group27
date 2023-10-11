@@ -34,7 +34,11 @@ hejaf oawefginawe ågpj
 # Dea
 
 ```{r}
+<<<<<<< HEAD
+ciao <-  c(a,s,d,f,g)
+=======
 aaaa <- c(a,s,d,f,g,h,j,k,l)
+>>>>>>> bc713a1d47955f0dd4f0b939986762e84867b060
 ```
 
 # Dilan

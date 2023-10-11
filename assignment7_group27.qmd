@@ -1,5 +1,141 @@
 ---
-title: "assignment7_group27"
-format: html
+title: "Lab 7 Assignment: Group 27"
+format:
+  html:
+    embed-resources: true
 editor: visual
 ---
+
++-----------------------+-----------------------+---------------+---------------+
+| Mikkel Piester Hansen | Christian Christensen | Dilan\        | Dea\          |
+|                       |                       | Cifci         | Bajo          |
++-----------------------+-----------------------+---------------+---------------+
+| s223105               | s223096               | s233597       | s232105       |
++-----------------------+-----------------------+---------------+---------------+
+
+# Load library
+
+```{r}
+library("tidyverse")
+library(broom)
+library(cowplot)
+
+```
+
+# Load data
+
+```{r}
+raw_dir <- "data/_raw/"
+data_file <- "gravier.RData"
+data_loc <- "https://github.com/ramhiser/datamicroarray/raw/master/data/"
+
+if( !dir.exists(raw_dir) ){
+  dir.create(path = raw_dir)
+}
+if( !file.exists(str_c(raw_dir, data_file)) ){
+  download.file(
+    url = str_c(data_loc, data_file),
+    destfile = str_c(raw_dir, data_file))
+}
+load(file = str_c(raw_dir, data_file))
+```
+
+# 1. Clean data
+
+Binding cols of the gravier dataset
+
+```{r}
+gravier_clean <- gravier |>
+  bind_cols() |>
+  as_tibble()
+```
+
+As the dataset is very large and contains 2900+ genes, we would like to just test the PCA analysis with the first 10 genes in the data.
+
+```{r}
+gravier_subset <- gravier_clean |> 
+  select(1:10, last_col())
+```
+
+# 2. Data in PC coordinates
+
+Fitting PCA to numeric coloumns in the data
+
+```{r}
+pca_fit <- 
+  gravier_subset |> 
+  select(where(is.numeric)) |> 
+  prcomp(scale = TRUE)
+```
+
+Plotting PC coordinates
+
+```{r}
+pca_fit |> 
+  augment(gravier_subset) |> 
+  ggplot(aes(.fittedPC1, 
+             .fittedPC2, 
+             color = y)) + 
+  geom_point(size = 1.5) +
+  scale_color_manual(
+    values = c(good = "#D55E00", 
+               poor = "#0072B2")
+  ) +
+  theme_half_open(12) + 
+  background_grid()
+```
+
+# 2. PC coordinates rotation matrix 
+
+Extract rotation matrix
+
+```{r}
+pca_fit |> 
+  tidy(matrix = "rotation")
+```
+
+Plotting the rotation matrix
+
+```{r}
+
+arrow_style <- arrow(
+  angle = 20, ends = "first", type = "closed", length = grid::unit(8, "pt")
+)
+
+
+pca_fit |> 
+  tidy(matrix = "rotation") |> 
+  pivot_wider(names_from = "PC", names_prefix = "PC", values_from = "value") |> 
+  ggplot(aes(PC1, PC2)) +
+  geom_segment(xend = 0, yend = 0, arrow = arrow_style) +
+  geom_text(
+    aes(label = column),
+    hjust = 1, nudge_x = -0.02, 
+    color = "#904C2F"
+  ) +
+  xlim(-1.25, .5) + ylim(-.5, 1) +
+  coord_fixed() +
+  theme_minimal_grid(12)
+```
+
+# 3. Looking at variance explained by PC components
+
+```{r}
+pca_fit |> 
+  tidy(matrix = "eigenvalues")
+```
+
+Plotting the variance
+
+```{r}
+pca_fit |> 
+  tidy(matrix = "eigenvalues") |> 
+  ggplot(aes(PC, percent)) +
+  geom_col(fill = "#56B4E9", alpha = 0.8) +
+  scale_x_continuous(breaks = 1:9) +
+  scale_y_continuous(
+    labels = scales::percent_format(),
+    expand = expansion(mult = c(0, 0.01))
+  ) +
+  theme_minimal_hgrid(12)
+```
